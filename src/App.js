@@ -7,8 +7,13 @@ import QuizList from './containers/QuizList/QuizList'
 import {Redirect, Route, Switch, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Logout from './components/Logout/Logout'
+import {autoLogin} from './store/actions/auth'
 
 class App extends Component {
+
+    componentDidMount() {
+        this.props.autoLogin()
+    }
 
     render() {
         let routes = (
@@ -44,4 +49,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(App));
+function mapDispatchToProps(dispatch) {
+    return {
+        autoLogin: () => dispatch(autoLogin())
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
