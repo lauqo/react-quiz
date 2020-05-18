@@ -11,3 +11,6 @@ export const QUIZ_NEXT_QUESTION = 'QUIZ_NEXT_QUESTION';
 export const QUIZ_ADD_ITEM = 'QUIZ_ADD_ITEM';
 export const QUIZ_RESET = 'QUIZ_RESET';
 export const QUIZ_CREATE_ERROR = 'QUIZ_CREATE_ERROR';
+
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
