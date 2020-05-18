@@ -33,9 +33,6 @@ export function authSuccess(token) {
 }
 
 export function autoLogout(expiresIn) {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    localStorage.removeItem('expirationDate');
     return dispatch => {
         setTimeout(() => {
             dispatch(logout())
@@ -44,6 +41,9 @@ export function autoLogout(expiresIn) {
 }
 
 export function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('expirationDate');
     return {
         type: AUTH_LOGOUT
     }
