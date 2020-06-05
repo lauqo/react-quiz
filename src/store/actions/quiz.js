@@ -17,7 +17,7 @@ export function fetchQuizzes() {
             const quizzes = [];
             Object.keys(response.data).forEach((key, index) => {
                 quizzes.push({
-                    id: key, name: `Тест №${index + 1}`
+                    id: key, name: `№${index + 1}`
                 })
             });
             dispatch(fetchQuizzesSuccess(quizzes));

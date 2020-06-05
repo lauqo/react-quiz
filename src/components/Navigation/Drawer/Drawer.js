@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import classes from './Drawer.css'
 import {NavLink} from 'react-router-dom'
 import Backdrop from '../../UI/Backdrop/Backdrop'
+import {LocaleContext} from '../../../context/LocaleContext'
+import {translate} from '../../../i18nConfig/translate'
 
 class Drawer extends Component {
 
@@ -28,15 +30,16 @@ class Drawer extends Component {
         if (!this.props.isOpen) {
             cls.push(classes.close)
         }
+        const {locale} = this.context
         const links = [
-            {to: '/', label: 'Список', exact: true},
+            {to: '/', label: translate(locale, 'list'), exact: true},
         ];
         if (this.props.isAuthenticated) {
-            links.push({to: '/quiz-creator', label: 'Создать тест', exact: false});
-            links.push({to: '/logout', label: 'Выйти', exact: false})
+            links.push({to: '/quiz-creator', label: translate(locale, 'create_quiz'), exact: false});
+            links.push({to: '/logout', label: translate(locale, 'sign_out'), exact: false})
         } else {
             links.push(
-                {to: '/auth', label: 'Авторизация', exact: false}
+                {to: '/auth', label: translate(locale, 'sign_in'), exact: false}
             )
         }
         return (
@@ -51,5 +54,7 @@ class Drawer extends Component {
         )
     }
 }
+
+Drawer.contextType = LocaleContext
 
 export default Drawer

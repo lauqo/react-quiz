@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import classes from './Input.css'
+import {LocaleContext} from '../../../context/LocaleContext'
+import {translate} from '../../../i18nConfig/translate'
 
 function isInvalid({valid, touched, shouldValidate}) {
     return !valid && shouldValidate && touched
@@ -12,6 +14,7 @@ const Input = props => {
     if (isInvalid(props)) {
         cls.push(classes.invalid)
     }
+    const locale = useContext(LocaleContext)
     return (
         <div className={cls.join(' ')}>
             <label htmlFor={htmlFor}>{props.label}</label>
@@ -20,7 +23,7 @@ const Input = props => {
                    value={props.value}
                    onChange={props.onChange} />
             {isInvalid(props)
-                ? <span>{props.errorMessage || 'Введите верное значение'}</span>
+                ? <span>{props.errorMessage || translate(locale, 'value_error')}</span>
                 : null}
         </div>
     )

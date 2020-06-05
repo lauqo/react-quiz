@@ -5,6 +5,8 @@ import Input from '../../components/UI/Input/Input'
 import is from 'is_js'
 import {connect} from 'react-redux'
 import {authorize} from '../../store/actions/auth'
+import {translate} from '../../i18nConfig/translate'
+import {LocaleContext} from '../../context/LocaleContext'
 
 class Auth extends React.Component {
 
@@ -14,26 +16,26 @@ class Auth extends React.Component {
             email: {
                 value: '',
                 type: 'email',
-                label: 'Email',
+                label: 'email',
                 touched: false,
                 valid: false,
                 validation: {
                     required: true,
                     email: true,
                 },
-                errorMessage: 'Введите корректный email'
+                errorMessage: 'email_error'
             },
             password: {
                 value: '',
                 type: 'password',
-                label: 'Пароль',
+                label: 'password',
                 touched: false,
                 valid: false,
                 validation: {
                     required: true,
                     minLength: 6
                 },
-                errorMessage: 'Введите корректный пароль'
+                errorMessage: 'password_error'
             }
         }
     };
@@ -72,6 +74,7 @@ class Auth extends React.Component {
     };
 
     renderInputs() {
+        const locale = this.context.locale
         return Object.keys(this.state.formControls)
             .map((controlName, index) => {
                 const control = this.state.formControls[controlName];
@@ -79,11 +82,11 @@ class Auth extends React.Component {
                     <Input key={controlName+index}
                            value={control.value}
                            type={control.type}
-                           label={control.label}
+                           label={translate(locale, control.label)}
                            touched={control.touched}
                            valid={control.valid}
                            shouldValidate={!!control.validation}
-                           errorMessage={control.errorMessage}
+                           errorMessage={translate(locale, control.errorMessage)}
                            onChange={event => this.onChangeHandler(event, controlName)} />
                 )
             })
@@ -110,24 +113,27 @@ class Auth extends React.Component {
     };
 
     render() {
+        const locale = this.context.locale
         return (
             <div className={classes.Auth}>
                 <div>
-                    <h1>Авторизация</h1>
+                    <h1>{translate(locale, 'sign_in')}</h1>
                     <form onSubmit={this.submitHandler} className={classes.AuthForm}>
                         {this.renderInputs()}
                         <Button type='success'
                                 onClick={this.loginHandler}
-                                disabled={!this.state.isFormValid}>Войти</Button>
+                                disabled={!this.state.isFormValid}>{translate(locale, 'log_in')}</Button>
                         <Button type='primary'
                                 onClick={this.registerHandler}
-                                disabled={!this.state.isFormValid}>Зарегистрироваться</Button>
+                                disabled={!this.state.isFormValid}>{translate(locale, 'register')}</Button>
                     </form>
                 </div>
             </div>
         )
     }
 }
+
+Auth.contextType = LocaleContext
 
 function mapDispatchToProps(dispatch) {
     return {

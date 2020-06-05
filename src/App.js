@@ -8,6 +8,7 @@ import {Redirect, Route, Switch, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Logout from './components/Logout/Logout'
 import {autoLogin} from './store/actions/auth'
+import {LocaleState} from './context/LocaleState'
 
 class App extends Component {
 
@@ -36,9 +37,11 @@ class App extends Component {
             )
         }
         return (
-            <Layout>
-                {routes}
-            </Layout>
+            <LocaleState>
+                <Layout>
+                    {routes}
+                </Layout>
+            </LocaleState>
         );
     }
 }

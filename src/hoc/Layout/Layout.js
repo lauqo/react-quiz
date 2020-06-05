@@ -3,6 +3,7 @@ import classes from './Layout.css'
 import MenuToggle from '../../components/Navigation/MenuToggle/MenuToggle'
 import Drawer from '../../components/Navigation/Drawer/Drawer'
 import {connect} from 'react-redux'
+import {LocaleBar} from '../../components/LocaleBar/LocaleBar'
 
 class Layout extends Component {
 
@@ -30,6 +31,7 @@ class Layout extends Component {
                         onClose={this.menuCloseHandler} />
                 <MenuToggle isOpen={this.state.menu}
                             onToggle={this.menuToggleHandler} />
+                <LocaleBar />
                 <main>
                     {this.props.children}
                 </main>

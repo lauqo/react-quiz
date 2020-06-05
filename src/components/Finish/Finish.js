@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import classes from './Finish.css'
 import Button from '../UI/Button/Button'
 import {Link} from 'react-router-dom'
+import {LocaleContext} from '../../context/LocaleContext'
+import {translate} from '../../i18nConfig/translate'
 
 const Finish = props => {
     const successCount = Object.keys(props.results).reduce((total, key) => {
@@ -10,6 +12,7 @@ const Finish = props => {
         }
         return total;
     }, 0);
+    const {locale} = useContext(LocaleContext)
     return (
         <div className={classes.Finish}>
             <ul>
@@ -28,11 +31,11 @@ const Finish = props => {
                     )
                 })}
             </ul>
-            <p>Правильно {successCount} из {props.quiz.length}</p>
+            <p>{translate(locale, 'correct_answers')} {successCount} {translate(locale, 'out_of')} {props.quiz.length}</p>
             <div>
-                <Button onClick={props.onRetry} type="primary">Повторить</Button>
+                <Button onClick={props.onRetry} type="primary">{translate(locale, 'retry')}</Button>
                 <Link to="/">
-                    <Button type="success">Перейти к списку тестов</Button>
+                    <Button type="success">{translate(locale, 'go_to_quiz_list')}</Button>
                 </Link>
             </div>
         </div>

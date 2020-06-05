@@ -1,0 +1,8 @@
+.LocaleBar {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    margin: 0;
+    list-style: none;
+    display: flex;
+}

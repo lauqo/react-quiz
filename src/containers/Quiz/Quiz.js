@@ -5,6 +5,8 @@ import Finish from '../../components/Finish/Finish'
 import Loader from '../../components/UI/Loader/Loader'
 import {connect} from 'react-redux'
 import {fetchQuiz, onAnswerClick, retryQuiz} from '../../store/actions/quiz'
+import {LocaleContext} from '../../context/LocaleContext'
+import {translate} from '../../i18nConfig/translate'
 
 class Quiz extends Component {
 
@@ -17,10 +19,11 @@ class Quiz extends Component {
     }
 
     render() {
+        const {locale} = this.context
         return (
             <div className={classes.Quiz}>
                 <div className={classes.QuizWrapper}>
-                    <h1>Ответьте на все вопросы</h1>
+                    <h1>{translate(locale, 'answer_all_questions')}</h1>
                     {this.props.loading || !this.props.quiz
                         ? <Loader/>
                         : this.props.isFinished
@@ -41,6 +44,8 @@ class Quiz extends Component {
         )
     }
 }
+
+Quiz.contextType = LocaleContext
 
 function mapStateToProps(state) {
     return {
