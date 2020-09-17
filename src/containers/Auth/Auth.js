@@ -137,7 +137,7 @@ Auth.contextType = LocaleContext
 
 function mapDispatchToProps(dispatch) {
     return {
-        signIn: (email, password) => dispatch(authorize(email, password, true)),
+        signIn: (email, password, isSignIn) => dispatch(authorize(email, password, isSignIn)),
     }
 }
 
